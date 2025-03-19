@@ -42,18 +42,22 @@ const Index: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-background text-foreground px-4 sm:px-6 transition-colors duration-300">
-      <header className="max-w-6xl mx-auto pt-8 pb-6 flex items-center justify-between">
-        <div className="animate-fade-in">
-          <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">RISC-V Cycle Simulator</h1>
-          <p className="text-muted-foreground mt-2 max-w-2xl">
-            Visualizing the execution cycles of RISC-V instructions
-          </p>
+    <div className="min-h-screen w-full bg-background text-foreground transition-colors duration-300">
+      <header className="border-b border-border/30 backdrop-blur-sm sticky top-0 z-10 bg-background/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex items-center justify-between">
+          <div className="animate-fade-in">
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              RISC-V Cycle Simulator
+            </h1>
+            <p className="text-muted-foreground mt-2 max-w-2xl">
+              Visualizing the execution cycles of RISC-V instructions
+            </p>
+          </div>
+          <ThemeToggle />
         </div>
-        <ThemeToggle />
       </header>
 
-      <main className="max-w-6xl mx-auto pb-20">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 pb-20">
         {loading ? (
           <div className="flex items-center justify-center min-h-[50vh]">
             <div className="text-center animate-pulse">
@@ -65,7 +69,7 @@ const Index: React.FC = () => {
             <p>{error}</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cycleData.map((data) => (
               <CycleCard key={data.cycle} cycle={data.cycle} logs={data.logs} />
             ))}

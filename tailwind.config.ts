@@ -53,6 +53,30 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Stage colors - Light Mode
+				"fetch-light": "#E6F7FF", // Light blue
+				"fetch-text-light": "#0066CC",
+				"decode-light": "#FFF7E6", // Light amber
+				"decode-text-light": "#D46B08",
+				"execute-light": "#F9F0FF", // Light purple
+				"execute-text-light": "#722ED1",
+				"memory-light": "#E6FFFB", // Light teal
+				"memory-text-light": "#08979C",
+				"writeback-light": "#F6FFED", // Light green
+				"writeback-text-light": "#389E0D",
+				
+				// Stage colors - Dark Mode
+				"fetch-dark": "#111D2C", // Dark blue
+				"fetch-text-dark": "#40A9FF",
+				"decode-dark": "#2B1D11", // Dark amber
+				"decode-text-dark": "#FFA940",
+				"execute-dark": "#120338", // Dark purple
+				"execute-text-dark": "#B37FEB",
+				"memory-dark": "#0A2E35", // Dark teal
+				"memory-text-dark": "#36CFC9",
+				"writeback-dark": "#162312", // Dark green
+				"writeback-text-dark": "#73D13D",
+				
 				stage: {
 					cycle: '#6366f1',
 					fetch: '#14b8a6',
