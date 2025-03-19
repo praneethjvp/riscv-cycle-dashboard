@@ -1,0 +1,35 @@
+
+[
+  {
+    "cycle": 1,
+    "logs": [
+      {"stage":"Cycle","message":"Clock Cycle: 1"},
+      {"stage":"Fetch","message":"PC = 0x00000000, IR = 0x00a28513"},
+      {"stage":"Decode","message":"opcode=0x13, rd=10, rs1=5, rs2=0, imm=10"},
+      {"stage":"Execute","message":"ADDI: 0 + 10 = 10"},
+      {"stage":"Memory","message":"No memory op."},
+      {"stage":"WriteBack","message":"Reg x10 = 10"},
+      {"stage":"Cycle End","message":"End of cycle 1"}
+    ]
+  },
+  {
+    "cycle": 2,
+    "logs": [
+      {"stage":"Cycle","message":"Clock Cycle: 2"},
+      {"stage":"Fetch","message":"PC = 0x00000004, IR = 0x00a505b3"},
+      {"stage":"Decode","message":"opcode=0x33, rd=11, rs1=10, rs2=10, imm=0"},
+      {"stage":"Execute","message":"ADD: 10 + 10 = 20"},
+      {"stage":"Memory","message":"No memory op."},
+      {"stage":"WriteBack","message":"Reg x11 = 20"},
+      {"stage":"Cycle End","message":"End of cycle 2"}
+    ]
+  },
+  {
+    "cycle": 3,
+    "logs": [
+      {"stage":"Cycle","message":"Clock Cycle: 3"},
+      {"stage":"Fetch","message":"PC = 0x00000008, IR = 0x00000000"},
+      {"stage":"EXIT","message":"Exit instruction encountered. Terminating simulation."}
+    ]
+  }
+]
