@@ -8,9 +8,21 @@ interface Log {
   message: string;
 }
 
+interface Register {
+  reg: string;
+  value: string;
+}
+
+interface Memory {
+  address: string;
+  value: string;
+}
+
 interface CycleData {
   cycle: number;
   logs: Log[];
+  registers?: Register[];
+  memory?: Memory[];
 }
 
 const Index: React.FC = () => {
@@ -69,9 +81,15 @@ const Index: React.FC = () => {
             <p>{error}</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-8">
             {cycleData.map((data) => (
-              <CycleCard key={data.cycle} cycle={data.cycle} logs={data.logs} />
+              <CycleCard 
+                key={data.cycle} 
+                cycle={data.cycle} 
+                logs={data.logs} 
+                registers={data.registers}
+                memory={data.memory}
+              />
             ))}
           </div>
         )}

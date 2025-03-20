@@ -8,12 +8,24 @@ interface Log {
   message: string;
 }
 
+interface Register {
+  reg: string;
+  value: string;
+}
+
+interface Memory {
+  address: string;
+  value: string;
+}
+
 interface CycleCardProps {
   cycle: number;
   logs: Log[];
+  registers?: Register[];
+  memory?: Memory[];
 }
 
-const CycleCard: React.FC<CycleCardProps> = ({ cycle, logs }) => {
+const CycleCard: React.FC<CycleCardProps> = ({ cycle, logs, registers, memory }) => {
   // Filter for the five main stages (or use default message if not found)
   const getStageMessage = (stageName: string) => {
     const log = logs.find(log => log.stage.toLowerCase() === stageName.toLowerCase());
@@ -32,12 +44,35 @@ const CycleCard: React.FC<CycleCardProps> = ({ cycle, logs }) => {
         <StageItem stage="Memory" message={getStageMessage("memory")} />
         <StageItem stage="WriteBack" message={getStageMessage("writeback")} />
         
-        {/* Display any other stages if present */}
-        {logs.filter(log => 
-          !["fetch", "decode", "execute", "memory", "writeback"].includes(log.stage.toLowerCase())
-        ).map((log, index) => (
-          <StageItem key={index} stage={log.stage} message={log.message} />
-        ))}
+        {/* Display registers if available */}
+        {registers && registers.length > 0 && (
+          <div className="mt-4 border border-border/30 rounded-md p-2">
+            <h3 className="text-sm font-medium mb-2">Registers</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1 text-xs">
+              {registers.slice(0, 16).map((reg, index) => (
+                <div key={index} className="flex justify-between bg-secondary/20 p-1 rounded">
+                  <span className="font-mono">{reg.reg}:</span>
+                  <span className="font-mono">{reg.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* Display memory if available */}
+        {memory && memory.length > 0 && (
+          <div className="mt-4 border border-border/30 rounded-md p-2">
+            <h3 className="text-sm font-medium mb-2">Memory</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1 text-xs">
+              {memory.slice(0, 8).map((mem, index) => (
+                <div key={index} className="flex justify-between bg-secondary/20 p-1 rounded">
+                  <span className="font-mono">{mem.address}:</span>
+                  <span className="font-mono">{mem.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
