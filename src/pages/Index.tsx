@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
 import CycleCard from "@/components/CycleCard";
 
@@ -62,10 +63,18 @@ const Index: React.FC = () => {
               RISC-V Cycle Simulator
             </h1>
             <p className="text-muted-foreground mt-2 max-w-2xl">
-              Visualizing the execution cycles of RISC-V instructions
+              Cycles Overview
             </p>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-4">
+            <Link 
+              to="/traverse" 
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Traverse Cycles
+            </Link>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 

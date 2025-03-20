@@ -53,7 +53,7 @@ const CycleCard: React.FC<CycleCardProps> = ({ cycle, logs, registers, memory })
             {registers && registers.length > 0 ? (
               <div className="border border-border/30 rounded-md p-2 h-full">
                 <h3 className="text-sm font-medium mb-2 pb-1 border-b">Registers</h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs overflow-y-auto max-h-[300px]">
+                <div className="grid grid-cols-1 gap-1.5 text-xs overflow-y-auto max-h-[300px]">
                   {registers.map((reg, index) => (
                     <div key={index} className="flex justify-between bg-secondary/20 p-1.5 rounded">
                       <span className="font-mono mr-1">{reg.reg}:</span>
@@ -74,7 +74,7 @@ const CycleCard: React.FC<CycleCardProps> = ({ cycle, logs, registers, memory })
             {memory && memory.length > 0 ? (
               <div className="border border-border/30 rounded-md p-2 h-full">
                 <h3 className="text-sm font-medium mb-2 pb-1 border-b">Memory</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs overflow-y-auto max-h-[300px]">
+                <div className="grid grid-cols-1 gap-1.5 text-xs overflow-y-auto max-h-[300px]">
                   {memory.map((mem, index) => (
                     <div key={index} className="flex justify-between bg-secondary/20 p-1.5 rounded">
                       <span className="font-mono mr-1">{mem.address}:</span>
