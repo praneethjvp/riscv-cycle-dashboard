@@ -33,48 +33,63 @@ const CycleCard: React.FC<CycleCardProps> = ({ cycle, logs, registers, memory })
   };
 
   return (
-    <Card className="animate-scale-in transition-shadow duration-300 hover:shadow-md">
+    <Card className="animate-scale-in transition-shadow duration-300 hover:shadow-md mb-6">
       <CardHeader className="pb-2">
-        <CardTitle className="text-xl text-center font-semibold">Cycle {cycle}</CardTitle>
+        <CardTitle className="text-xl font-semibold">Cycle {cycle}</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-1 pt-0">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
-          <StageItem stage="Fetch" message={getStageMessage("fetch")} />
-          <StageItem stage="Decode" message={getStageMessage("decode")} />
-          <StageItem stage="Execute" message={getStageMessage("execute")} />
-          <StageItem stage="Memory" message={getStageMessage("memory")} />
-          <StageItem stage="WriteBack" message={getStageMessage("writeback")} />
+      <CardContent className="pt-0">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+          {/* Pipeline Stages - Left Column (4 cols on md+) */}
+          <div className="md:col-span-4 space-y-2">
+            <StageItem stage="Fetch" message={getStageMessage("fetch")} />
+            <StageItem stage="Decode" message={getStageMessage("decode")} />
+            <StageItem stage="Execute" message={getStageMessage("execute")} />
+            <StageItem stage="Memory" message={getStageMessage("memory")} />
+            <StageItem stage="WriteBack" message={getStageMessage("writeback")} />
+          </div>
+          
+          {/* Registers - Middle Column (4 cols on md+) */}
+          <div className="md:col-span-4">
+            {registers && registers.length > 0 ? (
+              <div className="border border-border/30 rounded-md p-2 h-full">
+                <h3 className="text-sm font-medium mb-2 pb-1 border-b">Registers</h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs overflow-y-auto max-h-[300px]">
+                  {registers.map((reg, index) => (
+                    <div key={index} className="flex justify-between bg-secondary/20 p-1.5 rounded">
+                      <span className="font-mono mr-1">{reg.reg}:</span>
+                      <span className="font-mono truncate">{reg.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="border border-border/30 rounded-md p-2 h-full flex items-center justify-center">
+                <p className="text-sm text-muted-foreground">No register data available</p>
+              </div>
+            )}
+          </div>
+          
+          {/* Memory - Right Column (4 cols on md+) */}
+          <div className="md:col-span-4">
+            {memory && memory.length > 0 ? (
+              <div className="border border-border/30 rounded-md p-2 h-full">
+                <h3 className="text-sm font-medium mb-2 pb-1 border-b">Memory</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs overflow-y-auto max-h-[300px]">
+                  {memory.map((mem, index) => (
+                    <div key={index} className="flex justify-between bg-secondary/20 p-1.5 rounded">
+                      <span className="font-mono mr-1">{mem.address}:</span>
+                      <span className="font-mono truncate">{mem.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="border border-border/30 rounded-md p-2 h-full flex items-center justify-center">
+                <p className="text-sm text-muted-foreground">No memory data available</p>
+              </div>
+            )}
+          </div>
         </div>
-        
-        {/* Display registers if available */}
-        {registers && registers.length > 0 && (
-          <div className="mt-4 border border-border/30 rounded-md p-2">
-            <h3 className="text-sm font-medium mb-2">Registers</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-1 text-xs">
-              {registers.map((reg, index) => (
-                <div key={index} className="flex justify-between bg-secondary/20 p-1 rounded">
-                  <span className="font-mono mr-1">{reg.reg}:</span>
-                  <span className="font-mono truncate">{reg.value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-        
-        {/* Display memory if available */}
-        {memory && memory.length > 0 && (
-          <div className="mt-4 border border-border/30 rounded-md p-2">
-            <h3 className="text-sm font-medium mb-2">Memory</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 auto-rows-auto gap-1 text-xs">
-              {memory.map((mem, index) => (
-                <div key={index} className="flex justify-between bg-secondary/20 p-1 rounded">
-                  <span className="font-mono mr-1">{mem.address}:</span>
-                  <span className="font-mono truncate">{mem.value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </CardContent>
     </Card>
   );
