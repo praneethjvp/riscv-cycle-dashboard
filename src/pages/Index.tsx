@@ -34,7 +34,7 @@ const Index: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/web.txt");
+        const response = await fetch("../web.txt");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
