@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -72,6 +71,12 @@ const Index: React.FC = () => {
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Traverse Cycles
+            </Link>
+            <Link 
+              to="/pipeline" 
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Pipeline View
             </Link>
             <ThemeToggle />
           </div>
