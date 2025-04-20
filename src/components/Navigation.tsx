@@ -22,7 +22,7 @@ const Navigation = () => {
             {location.pathname === "/statistics" && "Performance Analysis"}
           </p>
         </div>
-        <div className="flex items-center gap-4">
+        <nav className="flex items-center gap-4">
           <Link 
             to="/" 
             className={`text-sm transition-colors ${
@@ -56,7 +56,7 @@ const Navigation = () => {
             Statistics
           </Link>
           <ThemeToggle />
-        </div>
+        </nav>
       </div>
     </header>
   );

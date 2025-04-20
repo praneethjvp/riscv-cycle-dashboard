@@ -79,11 +79,11 @@ export default {
 				
 				stage: {
 					cycle: '#6366f1',
-					fetch: '#14b8a6',
-					decode: '#f59e0b',
-					execute: '#ec4899',
-					memory: '#06b6d4',
-					writeback: '#8b5cf6',
+					fetch: '#0066CC',
+					decode: '#D46B08',
+					execute: '#722ED1',
+					memory: '#08979C',
+					writeback: '#389E0D',
 					exit: '#ef4444',
 				},
 				sidebar: {
