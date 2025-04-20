@@ -1,7 +1,5 @@
-
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import ThemeToggle from "@/components/ThemeToggle";
+import Navigation from "@/components/Navigation";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 interface PipelineStage {
@@ -66,34 +64,7 @@ const PipelineSimulation: React.FC = () => {
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground transition-colors duration-300">
-      <header className="border-b border-border/30 backdrop-blur-sm sticky top-0 z-10 bg-background/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex items-center justify-between">
-          <div className="animate-fade-in">
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-              Pipeline Simulation
-            </h1>
-            <p className="text-muted-foreground mt-2 max-w-2xl">
-              Instruction Pipeline View
-            </p>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link 
-              to="/" 
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Overview
-            </Link>
-            <Link 
-              to="/traverse" 
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Traverse Cycles
-            </Link>
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
-
+      <Navigation />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 pb-20">
         {loading ? (
           <div className="flex items-center justify-center min-h-[50vh]">

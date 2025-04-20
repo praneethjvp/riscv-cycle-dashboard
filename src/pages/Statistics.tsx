@@ -1,7 +1,5 @@
-
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import ThemeToggle from "@/components/ThemeToggle";
+import Navigation from "@/components/Navigation";
 import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { PieChart, Pie, BarChart, Bar, XAxis, YAxis, Tooltip, Cell } from "recharts";
 
@@ -86,40 +84,7 @@ const Statistics: React.FC = () => {
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground transition-colors duration-300">
-      <header className="border-b border-border/30 backdrop-blur-sm sticky top-0 z-10 bg-background/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-              Pipeline Statistics
-            </h1>
-            <p className="text-muted-foreground mt-2">
-              Performance Analysis and Metrics
-            </p>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link 
-              to="/" 
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Overview
-            </Link>
-            <Link 
-              to="/traverse" 
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Traverse
-            </Link>
-            <Link 
-              to="/pipeline" 
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Pipeline
-            </Link>
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
-
+      <Navigation />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm">
