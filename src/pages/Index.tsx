@@ -78,6 +78,12 @@ const Index: React.FC = () => {
             >
               Pipeline View
             </Link>
+            <Link 
+              to="/statistics" 
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Statistics
+            </Link>
             <ThemeToggle />
           </div>
         </div>
