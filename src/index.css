@@ -7,65 +7,57 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
-    
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-    
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    
-    --primary: 0 0% 0%;
-    --primary-foreground: 0 0% 100%;
-    
-    --secondary: 0 0% 13%;
-    --secondary-foreground: 0 0% 100%;
-    
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    
-    --accent: 0 0% 0%;
-    --accent-foreground: 0 0% 100%;
-    
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    
-    --border: 0 0% 0%;
-    --input: 0 0% 0%;
-    --ring: 0 0% 0%;
-    
-    --radius: 0.85rem;
-  }
+    --background: 248 37% 98%;       /* artistic pale lavender (#F1F0FB) */
+    --foreground: 247 20% 15%;       /* rich dark (#221F26) */
 
-  .dark {
-    --background: 0 0% 13%;
-    --foreground: 0 0% 100%;
-    
-    --card: 0 0% 0%;
-    --card-foreground: 0 0% 100%;
-    
-    --popover: 0 0% 0%;
-    --popover-foreground: 0 0% 100%;
-    
-    --primary: 0 0% 0%;
+    --card: 0 0% 100%;               /* white */
+    --card-foreground: 247 20% 15%;
+
+    --primary: 256 93% 67%;          /* #8B5CF6 violet-accent */
     --primary-foreground: 0 0% 100%;
-    
-    --secondary: 0 0% 13%;
+
+    --secondary: 23 96% 60%;         /* #F97316 orange-accent */
     --secondary-foreground: 0 0% 100%;
-    
-    --muted: 0 0% 13%;
-    --muted-foreground: 0 0% 45%;
-    
-    --accent: 0 0% 0%;
+
+    --muted: 0 0% 96%;               /* muted gray */
+    --muted-foreground: 247 12% 27%;
+
+    --accent: 199 73% 48%;           /* #1EAEDB cyan-accent */
     --accent-foreground: 0 0% 100%;
-    
-    --destructive: 0 84% 60%;
+
+    --destructive: 0 75% 61%;        /* vivid red */
     --destructive-foreground: 0 0% 100%;
-    
-    --border: 0 0% 0%;
-    --input: 0 0% 0%;
-    --ring: 0 0% 0%;
+
+    --border: 245 16% 82%;           /* soft gray borders */
+    --input: 245 16% 82%;
+    --ring: 247 20% 15%;
+    --radius: 1rem;
+  }
+  .dark {
+    --background: 247 18% 18%;       /* #28243A ui-card-dark */
+    --foreground: 0 0% 100%;         /* white */
+
+    --card: 248 34% 6%;              /* #221F26 dark charcoal */
+    --card-foreground: 0 0% 100%;
+
+    --primary: 256 93% 67%;          /* #8B5CF6 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 23 96% 60%;         /* #F97316 */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 245 30% 14%;            /* deep muted */
+    --muted-foreground: 0 0% 100%;
+
+    --accent: 199 73% 50%;           /* cyan-accent */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 75% 61%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 247 18% 30%;           /* deep border */
+    --input: 247 18% 30%;
+    --ring: 0 0% 100%;
   }
 }
 
@@ -73,47 +65,39 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground overflow-x-hidden antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
-
   html {
     @apply scroll-smooth;
   }
 }
-
 @layer utilities {
   .glass-card {
     @apply backdrop-blur-md bg-white/10 border border-white/20 shadow-sm dark:bg-black/10 dark:border-white/5;
   }
-  
-  .stage-cycle {
-    @apply text-stage-cycle;
+  /* Artistic accent shadow for cards */
+  .artistic-shadow {
+    box-shadow: 0 4px 24px 0 rgba(139,92,246,0.12), 0 0.5px 2px 0 rgba(23,23,39,0.18);
   }
-  
-  .stage-fetch {
-    @apply text-stage-fetch;
+  .block-fix {
+    min-width: 170px;
+    min-height: 92px;
+    max-width: 190px;
+    max-height: 102px;
+    width: 100%;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
   }
-  
-  .stage-decode {
-    @apply text-stage-decode;
-  }
-  
-  .stage-execute {
-    @apply text-stage-execute;
-  }
-  
-  .stage-memory {
-    @apply text-stage-memory;
-  }
-  
-  .stage-writeback {
-    @apply text-stage-writeback;
-  }
-  
-  .stage-exit {
-    @apply text-stage-exit;
+  .centered-summary {
+    @apply flex flex-col gap-2 my-4 p-6 rounded-xl items-center artistic-shadow bg-card text-card-foreground;
+    border: 2px solid var(--border);
+    max-width: 410px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

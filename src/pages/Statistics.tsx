@@ -35,14 +35,27 @@ const Statistics: React.FC = () => {
         setStats(data);
         setLoading(false);
       } catch (err) {
-        console.error("Error fetching statistics:", err);
         setError("Failed to load statistics data");
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
+
+  const summaryList = stats ? [
+    { label: "Total Cycles", value: stats.total_cycles },
+    { label: "Total Instructions Executed", value: stats.total_instructions },
+    { label: "Cycles Per Instruction (CPI)", value: stats.cpi },
+    { label: "Data-transfer Instructions", value: stats.data_transfer_instructions },
+    { label: "ALU Instructions", value: stats.alu_instructions },
+    { label: "Control Instructions", value: stats.control_instructions },
+    { label: "Total Stalls/Bubbles", value: stats.stall_count },
+    { label: "Data Hazards", value: stats.data_hazards },
+    { label: "Control Hazards", value: stats.control_hazards },
+    { label: "Branch Mispredictions", value: stats.branch_mispredictions },
+    { label: "Stalls due to Data Hazards", value: stats.stalls_data_hazards },
+    { label: "Stalls due to Control Hazards", value: stats.stalls_control_hazards },
+  ] : [];
 
   if (loading) {
     return (
@@ -75,15 +88,14 @@ const Statistics: React.FC = () => {
     { name: "ALU", value: stats.alu_instructions },
     { name: "Control", value: stats.control_instructions },
   ];
-
-  const COLORS = ["#222222", "#444444", "#666666"];
+  const COLORS = ["#8B5CF6", "#FFD700", "#F97316"];
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground transition-colors duration-300">
       <Navigation />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm">
+          <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm artistic-shadow">
             <h2 className="text-xl font-semibold mb-4">Instruction Types</h2>
             <ChartContainer config={{}} className="w-full aspect-square">
               <PieChart>
@@ -105,22 +117,22 @@ const Statistics: React.FC = () => {
             </ChartContainer>
           </div>
 
-          <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm">
+          <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm artistic-shadow">
             <h2 className="text-xl font-semibold mb-4">Hazards & Stalls</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 rounded-md bg-primary/10">
+              <div className="p-4 rounded-md" style={{ background: "linear-gradient(90deg, #8B5CF6 20%, #F1F0FB)" }}>
                 <h3 className="text-sm font-medium text-muted-foreground">Data Hazards</h3>
                 <p className="text-2xl font-bold">{stats.data_hazards}</p>
               </div>
-              <div className="p-4 rounded-md bg-primary/10">
+              <div className="p-4 rounded-md" style={{ background: "linear-gradient(90deg, #1EAEDB 20%, #F1F0FB)" }}>
                 <h3 className="text-sm font-medium text-muted-foreground">Control Hazards</h3>
                 <p className="text-2xl font-bold">{stats.control_hazards}</p>
               </div>
-              <div className="p-4 rounded-md bg-primary/10">
+              <div className="p-4 rounded-md" style={{ background: "linear-gradient(90deg, #FFD700 20%, #F1F0FB)" }}>
                 <h3 className="text-sm font-medium text-muted-foreground">Branch Mispredictions</h3>
                 <p className="text-2xl font-bold">{stats.branch_mispredictions}</p>
               </div>
-              <div className="p-4 rounded-md bg-primary/10">
+              <div className="p-4 rounded-md" style={{ background: "linear-gradient(90deg, #F97316 20%, #F1F0FB)" }}>
                 <h3 className="text-sm font-medium text-muted-foreground">Total Stalls</h3>
                 <p className="text-2xl font-bold">{stats.stall_count}</p>
               </div>
@@ -128,7 +140,7 @@ const Statistics: React.FC = () => {
           </div>
         </div>
 
-        <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm mb-8">
+        <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm mb-8 artistic-shadow">
           <h2 className="text-xl font-semibold mb-4">Performance Summary</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <div className="p-4 rounded-md bg-primary/10">
@@ -145,23 +157,17 @@ const Statistics: React.FC = () => {
             </div>
           </div>
         </div>
-
-        <div className="p-6 rounded-lg border bg-card text-card-foreground">
-          <h2 className="text-xl font-semibold mb-4">Detailed Statistics</h2>
-          <div className="space-y-2 text-sm">
-            <p><span className="text-muted-foreground">Total Cycles:</span> {stats.total_cycles}</p>
-            <p><span className="text-muted-foreground">Total Instructions Executed:</span> {stats.total_instructions}</p>
-            <p><span className="text-muted-foreground">Cycles Per Instruction (CPI):</span> {stats.cpi}</p>
-            <p><span className="text-muted-foreground">Data-transfer Instructions:</span> {stats.data_transfer_instructions}</p>
-            <p><span className="text-muted-foreground">ALU Instructions:</span> {stats.alu_instructions}</p>
-            <p><span className="text-muted-foreground">Control Instructions:</span> {stats.control_instructions}</p>
-            <p><span className="text-muted-foreground">Total Stalls/Bubbles:</span> {stats.stall_count}</p>
-            <p><span className="text-muted-foreground">Data Hazards:</span> {stats.data_hazards}</p>
-            <p><span className="text-muted-foreground">Control Hazards:</span> {stats.control_hazards}</p>
-            <p><span className="text-muted-foreground">Branch Mispredictions:</span> {stats.branch_mispredictions}</p>
-            <p><span className="text-muted-foreground">Stalls due to Data Hazards:</span> {stats.stalls_data_hazards}</p>
-            <p><span className="text-muted-foreground">Stalls due to Control Hazards:</span> {stats.stalls_control_hazards}</p>
-          </div>
+        {/* Aesthetic summary at end */}
+        <div className="centered-summary">
+          <h2 className="text-2xl font-extrabold text-primary mb-2">Detailed Statistics</h2>
+          <ul className="w-full">
+            {summaryList.map(({ label, value }, idx) => (
+              <li key={idx} className="flex justify-between gap-6 font-mono py-1">
+                <span className="font-semibold text-muted-foreground">{label}:</span>
+                <span className="text-accent text-right">{value}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </main>
     </div>
