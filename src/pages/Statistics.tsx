@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import { ChartContainer } from "@/components/ui/chart";
@@ -146,21 +145,21 @@ const Statistics: React.FC = () => {
           </div>
         </div>
 
-        <div className="p-6 rounded-lg border bg-card text-card-foreground">
-          <h2 className="text-xl font-semibold mb-4">Detailed Statistics</h2>
-          <div className="space-y-2 text-sm">
-            <p><span className="text-muted-foreground">Total Cycles:</span> {stats.total_cycles}</p>
-            <p><span className="text-muted-foreground">Total Instructions Executed:</span> {stats.total_instructions}</p>
-            <p><span className="text-muted-foreground">Cycles Per Instruction (CPI):</span> {stats.cpi}</p>
-            <p><span className="text-muted-foreground">Data-transfer Instructions:</span> {stats.data_transfer_instructions}</p>
-            <p><span className="text-muted-foreground">ALU Instructions:</span> {stats.alu_instructions}</p>
-            <p><span className="text-muted-foreground">Control Instructions:</span> {stats.control_instructions}</p>
-            <p><span className="text-muted-foreground">Total Stalls/Bubbles:</span> {stats.stall_count}</p>
-            <p><span className="text-muted-foreground">Data Hazards:</span> {stats.data_hazards}</p>
-            <p><span className="text-muted-foreground">Control Hazards:</span> {stats.control_hazards}</p>
-            <p><span className="text-muted-foreground">Branch Mispredictions:</span> {stats.branch_mispredictions}</p>
-            <p><span className="text-muted-foreground">Stalls due to Data Hazards:</span> {stats.stalls_data_hazards}</p>
-            <p><span className="text-muted-foreground">Stalls due to Control Hazards:</span> {stats.stalls_control_hazards}</p>
+        <div className="centered-summary">
+          <h2 className="text-xl font-semibold mb-2 text-center">Detailed Statistics</h2>
+          <div className="space-y-1 text-sm w-full">
+            <div className="flex justify-between font-medium"><span>Total Cycles:</span> <span>{stats.total_cycles}</span></div>
+            <div className="flex justify-between"><span>Total Instructions Executed:</span> <span>{stats.total_instructions}</span></div>
+            <div className="flex justify-between"><span>Cycles Per Instruction (CPI):</span> <span>{stats.cpi}</span></div>
+            <div className="flex justify-between"><span>Data-transfer Instructions:</span> <span>{stats.data_transfer_instructions}</span></div>
+            <div className="flex justify-between"><span>ALU Instructions:</span> <span>{stats.alu_instructions}</span></div>
+            <div className="flex justify-between"><span>Control Instructions:</span> <span>{stats.control_instructions}</span></div>
+            <div className="flex justify-between"><span>Total Stalls/Bubbles:</span> <span>{stats.stall_count}</span></div>
+            <div className="flex justify-between"><span>Data Hazards:</span> <span>{stats.data_hazards}</span></div>
+            <div className="flex justify-between"><span>Control Hazards:</span> <span>{stats.control_hazards}</span></div>
+            <div className="flex justify-between"><span>Branch Mispredictions:</span> <span>{stats.branch_mispredictions}</span></div>
+            <div className="flex justify-between"><span>Stalls due to Data Hazards:</span> <span>{stats.stalls_data_hazards}</span></div>
+            <div className="flex justify-between"><span>Stalls due to Control Hazards:</span> <span>{stats.stalls_control_hazards}</span></div>
           </div>
         </div>
       </main>

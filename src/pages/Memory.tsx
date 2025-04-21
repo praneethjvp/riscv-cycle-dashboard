@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -61,53 +60,25 @@ const Memory: React.FC = () => {
             <p>{error}</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm">
-              <h3 className="text-xl font-semibold mb-4">Memory Table</h3>
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-1/2">Address</TableHead>
-                      <TableHead className="w-1/2">Value</TableHead>
+          <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm mx-auto max-w-lg">
+            <h3 className="text-xl font-semibold mb-4">Memory Table</h3>
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-1/2">Address</TableHead>
+                    <TableHead className="w-1/2">Value</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {memoryData.map((entry, index) => (
+                    <TableRow key={index}>
+                      <TableCell className="font-mono">{entry.address}</TableCell>
+                      <TableCell className="font-mono">{entry.value}</TableCell>
                     </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {memoryData.map((entry, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="font-mono">{entry.address}</TableCell>
-                        <TableCell className="font-mono">{entry.value}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </div>
-            
-            <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm">
-              <h3 className="text-xl font-semibold mb-4">Memory Visualization</h3>
-              <div className="space-y-2">
-                {memoryData.map((entry, index) => {
-                  const value = parseInt(entry.value, 16);
-                  // Normalize the value for display purposes (0-100%)
-                  const percentage = Math.min(100, Math.max(0, (value / 0xF) * 100));
-                  
-                  return (
-                    <div key={index} className="space-y-1">
-                      <div className="flex justify-between text-sm">
-                        <span className="font-mono">{entry.address}</span>
-                        <span className="font-mono">{entry.value}</span>
-                      </div>
-                      <div className="w-full bg-muted h-2 rounded-full overflow-hidden">
-                        <div 
-                          className="bg-foreground h-full" 
-                          style={{ width: `${percentage}%` }}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+                  ))}
+                </TableBody>
+              </Table>
             </div>
           </div>
         )}
