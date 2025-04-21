@@ -140,13 +140,13 @@ const PipelineSimulation: React.FC = () => {
                               <div 
                                 key={idx}
                                 className={cn(
-                                  "rounded p-2 text-sm", 
+                                  "rounded p-2 text-sm block-fix", 
                                   entry.instruction === 0 
                                     ? "bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200"
                                     : "bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200"
                                 )}
                               >
-                                <div className="font-medium">I{entry.instruction}</div>
+                                <div className="font-medium">Instruction: {entry.instruction}</div>
                                 <div className="text-xs break-words">{entry.message}</div>
                               </div>
                             ))}
@@ -166,3 +166,4 @@ const PipelineSimulation: React.FC = () => {
 };
 
 export default PipelineSimulation;
+
