@@ -73,6 +73,7 @@
     @apply scroll-smooth;
   }
 }
+
 @layer utilities {
   .glass-card {
     @apply backdrop-blur-md bg-white/10 border border-white/20 shadow-sm dark:bg-black/10 dark:border-white/5;
@@ -94,7 +95,7 @@
     align-items: flex-start;
   }
   .centered-summary {
-    @apply flex flex-col gap-2 my-4 p-6 rounded-xl items-center artistic-shadow bg-card text-card-foreground;
+    @apply flex flex-col gap-2 my-4 p-6 rounded-xl items-center artistic-shadow bg-white dark:bg-step-dark text-foreground;
     border: 2px solid var(--border);
     max-width: 410px;
     margin-left: auto;
