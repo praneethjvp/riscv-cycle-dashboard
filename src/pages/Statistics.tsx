@@ -1,21 +1,22 @@
+
 import React, { useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
-import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
-import { PieChart, Pie, BarChart, Bar, XAxis, YAxis, Tooltip, Cell } from "recharts";
+import { ChartContainer } from "@/components/ui/chart";
+import { PieChart, Pie, Cell, Tooltip } from "recharts";
 
 interface StatisticsData {
-  totalCycles: number;
-  totalInstructions: number;
+  total_cycles: number;
+  total_instructions: number;
   cpi: number;
-  dataTransfer: number;
-  aluInstructions: number;
-  controlInstructions: number;
-  totalStalls: number;
-  dataHazards: number;
-  controlHazards: number;
-  branchMispredictions: number;
-  stallsDataHazards: number;
-  stallsControlHazards: number;
+  data_transfer_instructions: number;
+  alu_instructions: number;
+  control_instructions: number;
+  stall_count: number;
+  data_hazards: number;
+  control_hazards: number;
+  branch_mispredictions: number;
+  stalls_data_hazards: number;
+  stalls_control_hazards: number;
 }
 
 const Statistics: React.FC = () => {
@@ -45,9 +46,12 @@ const Statistics: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center animate-pulse">
-          <p className="text-lg">Loading statistics...</p>
+      <div className="min-h-screen w-full bg-background text-foreground">
+        <Navigation />
+        <div className="flex items-center justify-center min-h-[50vh]">
+          <div className="text-center animate-pulse">
+            <p className="text-lg">Loading statistics...</p>
+          </div>
         </div>
       </div>
     );
@@ -55,32 +59,24 @@ const Statistics: React.FC = () => {
 
   if (error || !stats) {
     return (
-      <div className="min-h-screen p-6">
-        <div className="bg-destructive/10 text-destructive p-4 rounded-lg">
-          <p>{error || "Failed to load statistics"}</p>
+      <div className="min-h-screen w-full bg-background text-foreground">
+        <Navigation />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+          <div className="bg-destructive/10 text-destructive p-4 rounded-lg">
+            <p>{error || "Failed to load statistics"}</p>
+          </div>
         </div>
       </div>
     );
   }
 
   const instructionTypeData = [
-    { name: "Data Transfer", value: stats.dataTransfer },
-    { name: "ALU", value: stats.aluInstructions },
-    { name: "Control", value: stats.controlInstructions },
+    { name: "Data Transfer", value: stats.data_transfer_instructions },
+    { name: "ALU", value: stats.alu_instructions },
+    { name: "Control", value: stats.control_instructions },
   ];
 
-  const hazardData = [
-    { name: "Data Hazards", value: stats.dataHazards },
-    { name: "Control Hazards", value: stats.controlHazards },
-    { name: "Branch Mispredictions", value: stats.branchMispredictions },
-  ];
-
-  const stallsData = [
-    { name: "Data Hazards", value: stats.stallsDataHazards },
-    { name: "Control Hazards", value: stats.stallsControlHazards },
-  ];
-
-  const COLORS = ["#1DCD9F", "#169976", "#222222"];
+  const COLORS = ["#222222", "#444444", "#666666"];
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground transition-colors duration-300">
@@ -110,15 +106,25 @@ const Statistics: React.FC = () => {
           </div>
 
           <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm">
-            <h2 className="text-xl font-semibold mb-4">Hazards Distribution</h2>
-            <ChartContainer config={{}} className="w-full aspect-square">
-              <BarChart data={hazardData}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#1DCD9F" />
-              </BarChart>
-            </ChartContainer>
+            <h2 className="text-xl font-semibold mb-4">Hazards & Stalls</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="p-4 rounded-md bg-primary/10">
+                <h3 className="text-sm font-medium text-muted-foreground">Data Hazards</h3>
+                <p className="text-2xl font-bold">{stats.data_hazards}</p>
+              </div>
+              <div className="p-4 rounded-md bg-primary/10">
+                <h3 className="text-sm font-medium text-muted-foreground">Control Hazards</h3>
+                <p className="text-2xl font-bold">{stats.control_hazards}</p>
+              </div>
+              <div className="p-4 rounded-md bg-primary/10">
+                <h3 className="text-sm font-medium text-muted-foreground">Branch Mispredictions</h3>
+                <p className="text-2xl font-bold">{stats.branch_mispredictions}</p>
+              </div>
+              <div className="p-4 rounded-md bg-primary/10">
+                <h3 className="text-sm font-medium text-muted-foreground">Total Stalls</h3>
+                <p className="text-2xl font-bold">{stats.stall_count}</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -127,11 +133,11 @@ const Statistics: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <div className="p-4 rounded-md bg-primary/10">
               <h3 className="text-sm font-medium text-muted-foreground">Total Cycles</h3>
-              <p className="text-2xl font-bold">{stats.totalCycles}</p>
+              <p className="text-2xl font-bold">{stats.total_cycles}</p>
             </div>
             <div className="p-4 rounded-md bg-primary/10">
               <h3 className="text-sm font-medium text-muted-foreground">Instructions Executed</h3>
-              <p className="text-2xl font-bold">{stats.totalInstructions}</p>
+              <p className="text-2xl font-bold">{stats.total_instructions}</p>
             </div>
             <div className="p-4 rounded-md bg-primary/10">
               <h3 className="text-sm font-medium text-muted-foreground">CPI</h3>
@@ -143,18 +149,18 @@ const Statistics: React.FC = () => {
         <div className="p-6 rounded-lg border bg-card text-card-foreground">
           <h2 className="text-xl font-semibold mb-4">Detailed Statistics</h2>
           <div className="space-y-2 text-sm">
-            <p><span className="text-muted-foreground">Total Cycles:</span> {stats.totalCycles}</p>
-            <p><span className="text-muted-foreground">Total Instructions Executed:</span> {stats.totalInstructions}</p>
+            <p><span className="text-muted-foreground">Total Cycles:</span> {stats.total_cycles}</p>
+            <p><span className="text-muted-foreground">Total Instructions Executed:</span> {stats.total_instructions}</p>
             <p><span className="text-muted-foreground">Cycles Per Instruction (CPI):</span> {stats.cpi}</p>
-            <p><span className="text-muted-foreground">Data-transfer Instructions:</span> {stats.dataTransfer}</p>
-            <p><span className="text-muted-foreground">ALU Instructions:</span> {stats.aluInstructions}</p>
-            <p><span className="text-muted-foreground">Control Instructions:</span> {stats.controlInstructions}</p>
-            <p><span className="text-muted-foreground">Total Stalls/Bubbles:</span> {stats.totalStalls}</p>
-            <p><span className="text-muted-foreground">Data Hazards:</span> {stats.dataHazards}</p>
-            <p><span className="text-muted-foreground">Control Hazards:</span> {stats.controlHazards}</p>
-            <p><span className="text-muted-foreground">Branch Mispredictions:</span> {stats.branchMispredictions}</p>
-            <p><span className="text-muted-foreground">Stalls due to Data Hazards:</span> {stats.stallsDataHazards}</p>
-            <p><span className="text-muted-foreground">Stalls due to Control Hazards:</span> {stats.stallsControlHazards}</p>
+            <p><span className="text-muted-foreground">Data-transfer Instructions:</span> {stats.data_transfer_instructions}</p>
+            <p><span className="text-muted-foreground">ALU Instructions:</span> {stats.alu_instructions}</p>
+            <p><span className="text-muted-foreground">Control Instructions:</span> {stats.control_instructions}</p>
+            <p><span className="text-muted-foreground">Total Stalls/Bubbles:</span> {stats.stall_count}</p>
+            <p><span className="text-muted-foreground">Data Hazards:</span> {stats.data_hazards}</p>
+            <p><span className="text-muted-foreground">Control Hazards:</span> {stats.control_hazards}</p>
+            <p><span className="text-muted-foreground">Branch Mispredictions:</span> {stats.branch_mispredictions}</p>
+            <p><span className="text-muted-foreground">Stalls due to Data Hazards:</span> {stats.stalls_data_hazards}</p>
+            <p><span className="text-muted-foreground">Stalls due to Control Hazards:</span> {stats.stalls_control_hazards}</p>
           </div>
         </div>
       </main>

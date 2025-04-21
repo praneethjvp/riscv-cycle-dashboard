@@ -1,15 +1,15 @@
 
 {
-  "totalCycles": 14,
-  "totalInstructions": 10,
-  "cpi": 1.40,
-  "dataTransfer": 2,
-  "aluInstructions": 6,
-  "controlInstructions": 2,
-  "totalStalls": 3,
-  "dataHazards": 2,
-  "controlHazards": 1,
-  "branchMispredictions": 0,
-  "stallsDataHazards": 2,
-  "stallsControlHazards": 1
+  "total_cycles": 588,
+  "total_instructions": 488,
+  "cpi": 1.205,
+  "data_transfer_instructions": 157,
+  "alu_instructions": 153,
+  "control_instructions": 178,
+  "stall_count": 97,
+  "data_hazards": 46,
+  "control_hazards": 51,
+  "branch_mispredictions": 51,
+  "stalls_data_hazards": 46,
+  "stalls_control_hazards": 51
 }

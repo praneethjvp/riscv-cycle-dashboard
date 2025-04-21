@@ -1,168 +1,41 @@
 
-{
-  "cycles": [
-    {
-      "cycle": 12,
-      "totalInstructions": 7,
-      "stages": [
-        {
-          "stage": "Fetch",
-          "instruction": 11,
-          "message": "PC=0x00000008, IR=0x00028863, NextPC=0x0000000C, PredictedTaken=0"
-        },
-        {
-          "stage": "Decode",
-          "instruction": 10,
-          "message": "PC=0x00000014, IR=0xFF5FF06F, rs1=x31(0), rs2=x21(0), rd=x0"
-        },
-        {
-          "stage": "Execute",
-          "instruction": 9,
-          "message": "PC=0x00000010, IR=0xFFF28293, ALU=ADDI"
-        },
-        {
-          "stage": "Memory",
-          "instruction": 8,
-          "message": "PC=0x0000000C"
-        },
-        {
-          "stage": "WriteBack",
-          "instruction": 7,
-          "message": "PC=0x00000008"
-        }
-      ],
-      "btbState": [
-        {
-          "entry": 2,
-          "pc": "0x00000008",
-          "target": "0x0000000C",
-          "prediction": 0
-        },
-        {
-          "entry": 5,
-          "pc": "0x00000014",
-          "target": "0x00000008",
-          "prediction": 1
-        }
-      ],
-      "registers": {
-        "x5": "0x00000001",
-        "x6": "0x00000002",
-        "x10": "0x00000001"
-      },
-      "predictions": {
-        "pc": "0x00000014",
-        "target": "0x00000008",
-        "prediction": 1,
-        "correct": true
-      }
-    },
-    {
-      "cycle": 13,
-      "totalInstructions": 8,
-      "stages": [
-        {
-          "stage": "Fetch",
-          "instruction": 0,
-          "message": "Stalled, keeping IF/ID unchanged"
-        },
-        {
-          "stage": "Decode",
-          "instruction": 11,
-          "message": "PC=0x00000008, IR=0x00028863, rs1=x5(0), rs2=x0(0), rd=x16"
-        },
-        {
-          "stage": "Execute",
-          "instruction": 10,
-          "message": "PC=0x00000014, IR=0xFF5FF06F, ALU=JAL"
-        },
-        {
-          "stage": "Memory",
-          "instruction": 9,
-          "message": "PC=0x00000010"
-        },
-        {
-          "stage": "WriteBack",
-          "instruction": 8,
-          "message": "PC=0x0000000C, x6 = 0x00000002"
-        }
-      ],
-      "btbState": [
-        {
-          "entry": 2,
-          "pc": "0x00000008",
-          "target": "0x00000018",
-          "prediction": 1
-        },
-        {
-          "entry": 5,
-          "pc": "0x00000014",
-          "target": "0x00000008",
-          "prediction": 1
-        }
-      ],
-      "registers": {
-        "x5": "0x00000001",
-        "x6": "0x00000002",
-        "x10": "0x00000001"
-      },
-      "predictions": {
-        "pc": "0x00000008",
-        "target": "0x00000018",
-        "prediction": 0,
-        "mispredicted": true,
-        "actualTarget": "0x00000018"
-      }
-    },
-    {
-      "cycle": 14,
-      "totalInstructions": 9,
-      "stages": [
-        {
-          "stage": "Fetch",
-          "instruction": 0,
-          "message": "No instruction at PC=0x00000018, marking IF/ID invalid"
-        },
-        {
-          "stage": "Decode",
-          "instruction": 0,
-          "message": "IF/ID invalid, inserting bubble"
-        },
-        {
-          "stage": "Execute",
-          "instruction": 11,
-          "message": "PC=0x00000008, IR=0x00028863, ALU=BEQ"
-        },
-        {
-          "stage": "Memory",
-          "instruction": 10,
-          "message": "PC=0x00000014"
-        },
-        {
-          "stage": "WriteBack",
-          "instruction": 9,
-          "message": "PC=0x00000010, x5 = 0x00000000"
-        }
-      ],
-      "btbState": [
-        {
-          "entry": 2,
-          "pc": "0x00000008",
-          "target": "0x00000018",
-          "prediction": 1
-        },
-        {
-          "entry": 5,
-          "pc": "0x00000014",
-          "target": "0x00000008",
-          "prediction": 1
-        }
-      ],
-      "registers": {
-        "x5": "0x00000000",
-        "x6": "0x00000002",
-        "x10": "0x00000001"
-      }
-    }
-  ]
-}
+[
+  { "event": "simulation_start", "pipelining": "enabled" },
+  { "cycle": 1 },
+    { "instruction": 0, "stage": "WriteBack", "message": "Reg x0 = 0" },
+    { "instruction": 0, "stage": "Memory", "message": "No mem-op" },
+    { "instruction": 0, "stage": "Execute", "message": "ALU=, result=0" },
+    { "instruction": 0, "stage": "Decode", "message": "rs1=x0(0), rs2=x0(0), rd=x0" },
+    { "instruction": 1, "stage": "Fetch", "message": "PC = 0x00000000, IR = 0x10000237" },
+  { "cycle": 2 },
+    { "instruction": 0, "stage": "WriteBack", "message": "Reg x0 = 0" },
+    { "instruction": 0, "stage": "Memory", "message": "No mem-op" },
+    { "instruction": 0, "stage": "Execute", "message": "ALU=, result=0" },
+    { "instruction": 1, "stage": "Decode", "message": "rs1=x0(0), rs2=x0(0), rd=x4" },
+    { "instruction": 2, "stage": "Fetch", "message": "PC = 0x00000004, IR = 0x00022503" },
+  { "cycle": 3 },
+    { "instruction": 0, "stage": "WriteBack", "message": "Reg x0 = 0" },
+    { "instruction": 0, "stage": "Memory", "message": "No mem-op" },
+    { "instruction": 1, "stage": "Execute", "message": "ALU=LUI, result=268435456" },
+    { "instruction": 2, "stage": "Decode", "message": "rs1=x4(268435456), rs2=x0(0), rd=x10" },
+    { "instruction": 3, "stage": "Fetch", "message": "PC = 0x00000008, IR = 0x00050613" },
+  { "cycle": 4 },
+    { "instruction": 0, "stage": "WriteBack", "message": "Reg x0 = 0" },
+    { "instruction": 1, "stage": "Memory", "message": "No mem-op" },
+    { "instruction": 2, "stage": "Execute", "message": "ALU=LW, result=268435456" },
+    { "instruction": 0, "stage": "Decode", "message": "rs1=x0(0), rs2=x0(0), rd=x0" },
+    { "instruction": 3, "stage": "Fetch", "message": "PC = 0x00000008, IR = 0x00050613" },
+  { "cycle": 5 },
+    { "instruction": 1, "stage": "WriteBack", "message": "Reg x4 = 268435456" },
+    { "instruction": 2, "stage": "Memory", "message": "Load from 0x0x00000000 = 10" },
+    { "instruction": 0, "stage": "Execute", "message": "ALU=, result=0" },
+    { "instruction": 3, "stage": "Decode", "message": "rs1=x10(10), rs2=x0(0), rd=x12" },
+    { "instruction": 4, "stage": "Fetch", "message": "PC = 0x0000000C, IR = 0x00420593" },
+  { "cycle": 6 },
+    { "instruction": 2, "stage": "WriteBack", "message": "Reg x10 = 10" },
+    { "instruction": 0, "stage": "Memory", "message": "No mem-op" },
+    { "instruction": 3, "stage": "Execute", "message": "ALU=ADDI, result=10" },
+    { "instruction": 4, "stage": "Decode", "message": "rs1=x4(268435456), rs2=x4(268435456), rd=x11" },
+    { "instruction": 5, "stage": "Fetch", "message": "PC = 0x00000010, IR = 0x00C000EF" },
+  { "cycle": 7 }
+]

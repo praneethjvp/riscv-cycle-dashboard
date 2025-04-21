@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import TraverseCycle from "./pages/TraverseCycle";
 import PipelineSimulation from "./pages/PipelineSimulation";
 import Statistics from "./pages/Statistics";
+import Memory from "./pages/Memory";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/traverse" element={<TraverseCycle />} />
           <Route path="/pipeline" element={<PipelineSimulation />} />
+          <Route path="/memory" element={<Memory />} />
           <Route path="/statistics" element={<Statistics />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

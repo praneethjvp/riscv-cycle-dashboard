@@ -18,7 +18,8 @@ const Navigation = () => {
           <p className="text-muted-foreground mt-2 max-w-2xl">
             {location.pathname === "/" && "Cycles Overview"}
             {location.pathname === "/traverse" && "Traverse execution cycles"}
-            {location.pathname === "/pipeline" && "Pipeline View"}
+            {location.pathname === "/pipeline" && "Pipeline Simulation"}
+            {location.pathname === "/memory" && "Memory View"}
             {location.pathname === "/statistics" && "Performance Analysis"}
           </p>
         </div>
@@ -45,7 +46,15 @@ const Navigation = () => {
               isActive("/pipeline") ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            Pipeline
+            Pipeline Simulation
+          </Link>
+          <Link 
+            to="/memory" 
+            className={`text-sm transition-colors ${
+              isActive("/memory") ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Memory
           </Link>
           <Link 
             to="/statistics" 
