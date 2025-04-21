@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, ArrowRight, ChevronsRight } from "lucide-react";
 
 interface PipelineStage {
   instruction: number;
@@ -31,15 +30,12 @@ const PipelineCellBox = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const PipelineSimulation: React.FC = () => {
+const PipelineOverview: React.FC = () => {
   const [pipelineData, setPipelineData] = useState<SimulationData>([]);
   const [cycles, setCycles] = useState<number[]>([]);
   const [maxInstructions, setMaxInstructions] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  // For displaying one cycle at a time
-  const [currentCycleIdx, setCurrentCycleIdx] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,17 +48,16 @@ const PipelineSimulation: React.FC = () => {
         const text = await response.text();
         const data: SimulationData = JSON.parse(text);
         setPipelineData(data);
-        
+
         const cycleEntries = data.filter(entry => 'cycle' in entry) as CycleData[];
         setCycles(cycleEntries.map(entry => entry.cycle));
-        
+
         const maxInst = data.reduce((max, entry) => {
           if ('instruction' in entry && 'stage' in entry) {
             return Math.max(max, entry.instruction);
           }
           return max;
         }, 0);
-        
         setMaxInstructions(maxInst);
         setLoading(false);
       } catch (err) {
@@ -71,78 +66,37 @@ const PipelineSimulation: React.FC = () => {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
   const getStageForCycleAndInstruction = (cycle: number, instruction: number, stageName: string) => {
     // Find index of the cycle entry
     const cycleIndex = pipelineData.findIndex(entry => 'cycle' in entry && entry.cycle === cycle);
-    
     if (cycleIndex === -1) return null;
-    
+
     // Look for the stage entry after this cycle entry
     for (let i = cycleIndex + 1; i < pipelineData.length; i++) {
       const entry = pipelineData[i];
-      
-      // Stop if we hit the next cycle
       if ('cycle' in entry) break;
-      
-      // Check if this is the stage we're looking for
       if ('instruction' in entry && 'stage' in entry && 
           entry.instruction === instruction && 
           entry.stage.toLowerCase() === stageName.toLowerCase()) {
         return entry;
       }
     }
-    
     return null;
   };
-
-  // Navigation handlers for cycle view
-  const handlePrev = () => setCurrentCycleIdx((idx) => Math.max(0, idx - 1));
-  const handleNext = () => setCurrentCycleIdx((idx) => Math.min(cycles.length - 1, idx + 1));
-  const handleEnd = () => setCurrentCycleIdx(cycles.length - 1);
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground transition-colors duration-300">
       <Navigation />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 pb-20">
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-center">Pipeline Simulation</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center">Pipeline Overview</h2>
           <p className="text-muted-foreground mb-6 text-center">
-            Visualizing the five-stage pipeline (Fetch, Decode, Execute, Memory, WriteBack) for RISC-V instructions.
+            Visualizing the five-stage pipeline for all cycles at once.
           </p>
         </div>
-
-        {/* Cycle navigation */}
-        {!loading && !error && cycles.length > 0 && (
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <button
-              onClick={handlePrev}
-              disabled={currentCycleIdx === 0}
-              className="inline-flex items-center justify-center gap-1 px-4 py-2 rounded bg-primary text-primary-foreground disabled:opacity-50 transition-colors hover:bg-primary/80 shadow-sm"
-            >
-              <ArrowLeft className="mr-1" size={18} /> Prev
-            </button>
-            <span className="font-semibold text-md px-3 py-2 bg-muted/50 rounded">{`Cycle ${cycles[currentCycleIdx]}`}</span>
-            <button
-              onClick={handleNext}
-              disabled={currentCycleIdx === cycles.length - 1}
-              className="inline-flex items-center justify-center gap-1 px-4 py-2 rounded bg-primary text-primary-foreground disabled:opacity-50 transition-colors hover:bg-primary/80 shadow-sm"
-            >
-              Next <ArrowRight className="ml-1" size={18} />
-            </button>
-            <button
-              onClick={handleEnd}
-              disabled={currentCycleIdx === cycles.length - 1}
-              className="inline-flex items-center justify-center gap-1 px-4 py-2 rounded bg-secondary text-secondary-foreground disabled:opacity-50 transition-colors hover:bg-secondary/80 shadow-sm"
-            >
-              End <ChevronsRight className="ml-1" size={18} />
-            </button>
-          </div>
-        )}
-
         {loading ? (
           <div className="flex items-center justify-center min-h-[50vh]">
             <div className="text-center animate-pulse">
@@ -154,7 +108,7 @@ const PipelineSimulation: React.FC = () => {
             <p>{error}</p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-auto">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -170,14 +124,13 @@ const PipelineSimulation: React.FC = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {/* Only show one cycle at a time */}
-                {cycles.length > 0 && (
-                  <TableRow key={cycles[currentCycleIdx]}>
-                    <TableCell className="font-semibold min-w-[80px] text-center">{`Cycle ${cycles[currentCycleIdx]}`}</TableCell>
+                {cycles.map((cycle) => (
+                  <TableRow key={cycle}>
+                    <TableCell className="font-semibold min-w-[80px] text-center">Cycle {cycle}</TableCell>
                     {CYCLE_STAGE_ORDER.map((stageName) => {
                       const stagesInThisCycle = [];
                       for (let i = 0; i <= maxInstructions; i++) {
-                        const stageEntry = getStageForCycleAndInstruction(cycles[currentCycleIdx], i, stageName);
+                        const stageEntry = getStageForCycleAndInstruction(cycle, i, stageName);
                         if (stageEntry) {
                           stagesInThisCycle.push(stageEntry);
                         }
@@ -214,7 +167,7 @@ const PipelineSimulation: React.FC = () => {
                       );
                     })}
                   </TableRow>
-                )}
+                ))}
               </TableBody>
             </Table>
           </div>
@@ -224,5 +177,5 @@ const PipelineSimulation: React.FC = () => {
   );
 };
 
-export default PipelineSimulation;
+export default PipelineOverview;
 

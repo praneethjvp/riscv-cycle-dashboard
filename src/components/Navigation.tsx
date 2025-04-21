@@ -19,6 +19,7 @@ const Navigation = () => {
             {location.pathname === "/" && "Cycles Overview"}
             {location.pathname === "/traverse" && "Traverse execution cycles"}
             {location.pathname === "/pipeline" && "Pipeline Simulation"}
+            {location.pathname === "/pipeline-overview" && "Pipeline Overview"}
             {location.pathname === "/memory" && "Memory View"}
             {location.pathname === "/statistics" && "Performance Analysis"}
           </p>
@@ -49,6 +50,14 @@ const Navigation = () => {
             Pipeline Simulation
           </Link>
           <Link 
+            to="/pipeline-overview" 
+            className={`text-sm transition-colors ${
+              isActive("/pipeline-overview") ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Pipeline Overview
+          </Link>
+          <Link 
             to="/memory" 
             className={`text-sm transition-colors ${
               isActive("/memory") ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
@@ -72,3 +81,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
+

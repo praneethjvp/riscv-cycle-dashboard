@@ -145,21 +145,47 @@ const Statistics: React.FC = () => {
           </div>
         </div>
 
-        <div className="centered-summary">
+        <div className="flex flex-col items-center justify-center mb-8">
           <h2 className="text-xl font-semibold mb-2 text-center">Detailed Statistics</h2>
-          <div className="space-y-1 text-sm w-full">
-            <div className="flex justify-between font-medium"><span>Total Cycles:</span> <span>{stats.total_cycles}</span></div>
-            <div className="flex justify-between"><span>Total Instructions Executed:</span> <span>{stats.total_instructions}</span></div>
-            <div className="flex justify-between"><span>Cycles Per Instruction (CPI):</span> <span>{stats.cpi}</span></div>
-            <div className="flex justify-between"><span>Data-transfer Instructions:</span> <span>{stats.data_transfer_instructions}</span></div>
-            <div className="flex justify-between"><span>ALU Instructions:</span> <span>{stats.alu_instructions}</span></div>
-            <div className="flex justify-between"><span>Control Instructions:</span> <span>{stats.control_instructions}</span></div>
-            <div className="flex justify-between"><span>Total Stalls/Bubbles:</span> <span>{stats.stall_count}</span></div>
-            <div className="flex justify-between"><span>Data Hazards:</span> <span>{stats.data_hazards}</span></div>
-            <div className="flex justify-between"><span>Control Hazards:</span> <span>{stats.control_hazards}</span></div>
-            <div className="flex justify-between"><span>Branch Mispredictions:</span> <span>{stats.branch_mispredictions}</span></div>
-            <div className="flex justify-between"><span>Stalls due to Data Hazards:</span> <span>{stats.stalls_data_hazards}</span></div>
-            <div className="flex justify-between"><span>Stalls due to Control Hazards:</span> <span>{stats.stalls_control_hazards}</span></div>
+          <div className="bg-card/80 px-6 py-4 rounded-lg shadow border w-full max-w-md mx-auto">
+            <div className="space-y-1 text-sm">
+              <div className="flex justify-between items-center gap-2 font-medium">
+                <span>Total Cycles:</span> <span>{stats.total_cycles}</span>
+              </div>
+              <div className="flex justify-between items-center gap-2">
+                <span>Total Instructions Executed:</span> <span>{stats.total_instructions}</span>
+              </div>
+              <div className="flex justify-between items-center gap-2">
+                <span>Cycles Per Instruction (CPI):</span> <span>{stats.cpi}</span>
+              </div>
+              <div className="flex justify-between items-center gap-2">
+                <span>Data-transfer Instructions:</span> <span>{stats.data_transfer_instructions}</span>
+              </div>
+              <div className="flex justify-between items-center gap-2">
+                <span>ALU Instructions:</span> <span>{stats.alu_instructions}</span>
+              </div>
+              <div className="flex justify-between items-center gap-2">
+                <span>Control Instructions:</span> <span>{stats.control_instructions}</span>
+              </div>
+              <div className="flex justify-between items-center gap-2">
+                <span>Total Stalls/Bubbles:</span> <span>{stats.stall_count}</span>
+              </div>
+              <div className="flex justify-between items-center gap-2">
+                <span>Data Hazards:</span> <span>{stats.data_hazards}</span>
+              </div>
+              <div className="flex justify-between items-center gap-2">
+                <span>Control Hazards:</span> <span>{stats.control_hazards}</span>
+              </div>
+              <div className="flex justify-between items-center gap-2">
+                <span>Branch Mispredictions:</span> <span>{stats.branch_mispredictions}</span>
+              </div>
+              <div className="flex justify-between items-center gap-2">
+                <span>Stalls due to Data Hazards:</span> <span>{stats.stalls_data_hazards}</span>
+              </div>
+              <div className="flex justify-between items-center gap-2">
+                <span>Stalls due to Control Hazards:</span> <span>{stats.stalls_control_hazards}</span>
+              </div>
+            </div>
           </div>
         </div>
       </main>

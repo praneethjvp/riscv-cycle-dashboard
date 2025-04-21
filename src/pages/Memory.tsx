@@ -43,12 +43,11 @@ const Memory: React.FC = () => {
       <Navigation />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 pb-20">
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Memory Contents</h2>
-          <p className="text-muted-foreground mb-6">
+          <h2 className="text-2xl font-bold mb-4 text-center">Memory Contents</h2>
+          <p className="text-muted-foreground mb-6 text-center">
             Displaying memory values from the RISC-V processor's memory space.
           </p>
         </div>
-        
         {loading ? (
           <div className="flex items-center justify-center min-h-[50vh]">
             <div className="text-center animate-pulse">
@@ -60,26 +59,8 @@ const Memory: React.FC = () => {
             <p>{error}</p>
           </div>
         ) : (
-          <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm mx-auto max-w-lg">
-            <h3 className="text-xl font-semibold mb-4">Memory Table</h3>
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-1/2">Address</TableHead>
-                    <TableHead className="w-1/2">Value</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {memoryData.map((entry, index) => (
-                    <TableRow key={index}>
-                      <TableCell className="font-mono">{entry.address}</TableCell>
-                      <TableCell className="font-mono">{entry.value}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
+          <div className="flex flex-col items-center justify-center text-center min-h-[30vh]">
+            <h3 className="text-lg font-medium text-muted-foreground">Memory visualization is removed as requested.</h3>
           </div>
         )}
       </main>
